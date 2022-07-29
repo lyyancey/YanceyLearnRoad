@@ -1,0 +1,10 @@
+elasticsearch:
+  rest:
+    hosts: 127.0.0.1:9200
+    username: elastic
+    password: elasticsearch
+spring:
+  elasticsearch:
+    uris: http://127.0.0.1:9200
+    username: elastic
+    password: elasticsearch
