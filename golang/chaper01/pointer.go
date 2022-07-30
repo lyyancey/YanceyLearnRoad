@@ -14,6 +14,7 @@ func main() {
 	var C *int = &A
 	*C = 5
 	fmt.Printf("%T, %d\n", C, *C)
+	fmt.Printf("%T, %p\n", C, C)
 	fmt.Println(A)
 
 }
