@@ -112,4 +112,13 @@ func main() {
 	array02 := array01
 	array02[0] = 10
 	fmt.Println(array01, array02)
+
+	// 切片删除
+	fmt.Println("切片的删除")
+
+	nums07 := []int{1, 3, 5, 8}
+	fmt.Println(nums07[:1])
+	fmt.Println(nums07[2:])
+	nums07 = append(nums07[:1], nums07[2:]...)
+	fmt.Println(nums07)
 }
