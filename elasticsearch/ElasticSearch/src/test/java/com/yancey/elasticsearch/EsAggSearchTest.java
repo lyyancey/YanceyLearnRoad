@@ -17,4 +17,9 @@ public class EsAggSearchTest {
     void testGetStatsAggSearch(){
         aggreSearch.getStatsAggSearch();
     }
+
+    @Test
+    void testGetValueCountAggSearch(){
+        aggreSearch.getValueCountAggSearch();
+    }
 }

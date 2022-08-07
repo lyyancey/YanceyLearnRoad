@@ -7,10 +7,7 @@ import org.elasticsearch.client.RestHighLevelClient;
 import org.elasticsearch.search.aggregations.Aggregation;
 import org.elasticsearch.search.aggregations.AggregationBuilders;
 import org.elasticsearch.search.aggregations.Aggregations;
-import org.elasticsearch.search.aggregations.metrics.Avg;
-import org.elasticsearch.search.aggregations.metrics.AvgAggregationBuilder;
-import org.elasticsearch.search.aggregations.metrics.Stats;
-import org.elasticsearch.search.aggregations.metrics.StatsAggregationBuilder;
+import org.elasticsearch.search.aggregations.metrics.*;
 import org.elasticsearch.search.builder.SearchSourceBuilder;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -77,6 +74,32 @@ public class EsAggreSearch {
         } catch (IOException e) {
             throw new RuntimeException(e);
         }
+    }
+
+    public void getValueCountAggSearch(){
+        SearchRequest request = new SearchRequest("hotel003");
+        SearchSourceBuilder sourceBuilder = new SearchSourceBuilder();
+        String aggName = "my_agg"; // 聚合名称
+        // 定义value_count聚合，指定字段为price
+        ValueCountAggregationBuilder aggregationBuilder = AggregationBuilders.count(aggName).field("price");
+        aggregationBuilder.missing("200");
+        sourceBuilder.aggregation(aggregationBuilder);// 添加聚合
+        request.source(sourceBuilder); // 设置查询请求
+        try {
+            // 执行查询
+            SearchResponse response = client.search(request, RequestOptions.DEFAULT);
+            // 获取聚合结果
+            Aggregations aggregations = response.getAggregations();
+            // 获取value_count聚合返回的对象
+            ValueCount valueCount = aggregations.get(aggName);
+            String key = valueCount.getName(); // 获取聚合名称
+            long count = valueCount.getValue(); // 获取聚合值
+            System.out.println("key = "+ key + ", count = "+count);
+
+        } catch (IOException e) {
+            throw new RuntimeException(e);
+        }
+
 
     }
 }
