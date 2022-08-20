@@ -28,25 +28,27 @@ public class EsAggSearchTest {
         aggreSearch.getValueCountAggSearch();
     }
     @Test
-    void testMethod(){
-        groupThePeople(new int[]{3,3,3,3,3,1,3});
+    void testSumAgg(){
+        aggreSearch.getSumAggSearch();
     }
-
-    List<List<Integer>> groupThePeople(int[] groupSizes) {
-        Map<String, List<Integer>> map = new HashMap<>();
-        List<List<Integer>> res = new ArrayList<>();
-        for(int val : groupSizes) {
-            List<Integer> list = map.getOrDefault(String.valueOf(val), new ArrayList<>());
-            if(list.size() == val) {
-                res.add(list);
-                map.remove(String.valueOf(val));
-            }else {
-                list.add(val);
-            }
-        }
-        for(String val : map.keySet()){
-            res.add(map.get(val));
-        }
-        return res;
+    @Test
+    void testBucketDocCount(){
+        aggreSearch.getBucketDocCountAggSearch();
+    }
+    @Test
+    void testRangeDocCountAggSearch(){
+        aggreSearch.getRangeDocCountAggSearch();
+    }
+    @Test
+    void testBucketAggSearch(){
+        aggreSearch.getBucketAggSearch();
+    }
+    @Test
+    void testExternalBucketAggSearch(){
+        aggreSearch.getExternalBucketAggSearch();
+    }
+    @Test
+    void testGeoDistanceAgg(){
+        aggreSearch.getGeoDistanceAggSearch();
     }
 }
